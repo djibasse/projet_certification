@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% form_theme formChambre 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+ <h2> Création d'une annonce</h2>
+
+      
+    {{form_start(formChambre)}}
+    {{form_widget(formChambre)}}    
+        <button type="submit" > Enregistrer</button>
+    {{form_end(formChambre)}}
+    
+    
+ 
+ {% endblock %}
+
