@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ChambreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,36 @@ class Chambre
      * @ORM\Column(type="string", length=255)
      */
     private $etat;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nombreDeLits;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $chauffage;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $salleDeBain;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="chambre")
+     */
+    private $reservations;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="chambres")
+     */
+    private $categorie;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +135,84 @@ class Chambre
     public function setEtat(string $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getNombreDeLits(): ?int
+    {
+        return $this->nombreDeLits;
+    }
+
+    public function setNombreDeLits(int $nombreDeLits): self
+    {
+        $this->nombreDeLits = $nombreDeLits;
+
+        return $this;
+    }
+
+    public function getChauffage(): ?string
+    {
+        return $this->chauffage;
+    }
+
+    public function setChauffage(string $chauffage): self
+    {
+        $this->chauffage = $chauffage;
+
+        return $this;
+    }
+
+    public function getSalleDeBain(): ?string
+    {
+        return $this->salleDeBain;
+    }
+
+    public function setSalleDeBain(string $salleDeBain): self
+    {
+        $this->salleDeBain = $salleDeBain;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setChambre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getChambre() === $this) {
+                $reservation->setChambre(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
