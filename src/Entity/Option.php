@@ -3,12 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\OptionRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=OptionRepository::class)
  * @ORM\Table(name="`option`")
  */
+#[ApiResource()]
+
 class Option
 {
     /**
