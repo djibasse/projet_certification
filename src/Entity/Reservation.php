@@ -2,47 +2,66 @@
 
 namespace App\Entity;
 
-use App\Repository\ReservationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ReservationRepository;
+use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ReservationRepository::class)
  */
-#[ApiResource()]
+#[ApiResource(
+    
+    normalizationContext:['groups' =>['lire_reservation']],
+    denormalizationContext:['groups' =>['modifier_reservation']],
+ 
+    itemOperations:[
+        'put',
+        'delete',
+        'get'=> [
+            'normalization_context' => ['groups' => ['lire_reservation']]
+        ]
+    ]
+)]
 class Reservation
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("lire_reservation")
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("lire_reservation")
      */
     private $numeroReservation;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("lire_reservation")
      */
     private $dateReservation;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups("lire_reservation")
      */
     private $dateFinReservation;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("lire_reservation")
      */
     private $nombreDePersonne;
 
     /**
      * @ORM\OneToMany(targetEntity=Option::class, mappedBy="reservation")
+     * @Groups("lire_reservation")
      */
     private $options;
 

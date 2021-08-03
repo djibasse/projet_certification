@@ -2,17 +2,29 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\CategorieRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CategorieRepository::class)
  */
 
-#[ApiResource()] 
+#[ApiResource(
+    normalizationContext:['groups' =>['lire_categorie']],
+    denormalizationContext:['groups' =>['modifier_categorie']],
+    
+    itemOperations:[
+        'put',
+        'delete',
+        'get'=> [
+            'normalization_context' => ['groups' => ['lire_une_categorie','lire_categorie']]
+        ]
+    ]
+)]
 
 class Categorie
 {
@@ -20,20 +32,24 @@ class Categorie
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("lire_categorie")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("lire_categorie","modifier_categorie")
      */
     private $libele;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("lire_categorie","modifier_categorie")
      */
     private $description;
 
     /**
+     * @Groups("lire_une_categorie")
      * @ORM\OneToMany(targetEntity=Chambre::class, mappedBy="categorie")
      */
     private $chambres;

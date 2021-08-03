@@ -3,7 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Bienvenue!{% endblock %}</title>
-        <link rel="stylesheet" href="https://bootswatch.com/5/spacelab/bootstrap.min.css">
+        <link rel="stylesheet" href="https://bootswatch.com/5/solar/bootstrap.min.css">
+
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
@@ -15,27 +16,39 @@
         {% endblock %}
     </head>
     <body>
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Accueil</a>
-    
-    <div class="collapse navbar-collapse" id="navbarColor03">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/annonce">Anonnces</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={{ path('creation_chambre') }} >Créer unes annonce</a>
-        </li>
-        <li class="nav-item">
-           <a class="nav-link"  >Créer un administrateur</a>
-  
-        </li>
-       </ul>
-    </div>
-  </div>
-</nav>
+                
+          <div name="accueill" class="jumbotron text-center">
+            <h1>Hotel Sogui</h1>
+            <p>Resize this responsive page to see the effect!</p> 
+          </div>
+          <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#" _msthash="1864226" _msttexthash="349570">Barre de navigation</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" _msthidden="A" _msthiddenattr="1739517" _mstaria-label="320099">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#"><font _mstmutation="1" _msthash="622544" _msttexthash="114218">domicile </font><span class="visually-hidden" _msthash="913744" _msttexthash="122200">(current)</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" _msthash="622726" _msttexthash="329004">fonctionnalités</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" _msthash="622908" _msttexthash="98358">prisée</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" _msthash="623090" _msttexthash="100295">environ</a>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  <button class="btn btn-secondary my-2 my-sm-0" type="submit" _msthash="730886" _msttexthash="157274">Connexion</button>
+                </form>
+              </div>
+            </div>
+          </nav>
 <div class="container"> 
         {% block body %}{% endblock %}
 </div>

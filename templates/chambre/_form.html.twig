@@ -1,4 +1,10 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+
+    <div class="col-md-5">{{form_row(form.numeroChambre,{'attr': { 'placeholder': 'Numero de la chambre'}}) }}</div>
+    <div class="col-md-5">{{form_row(form.etage,{'attr': { 'placeholder': 'Etage'}}) }}</div>
+    <div class="col-md-5">{{form_row(form.prix,{'attr': { 'placeholder': 'Saisir le prix de la chambre'}}) }}</div>
+    <div class="col-md-5">{{form_row(form.etat) }}</div>
+    <div class="col-md-5">{{form_row(form.description,{'attr': { 'placeholder': 'description'}}) }}</div>
+    {{form_widget(form)}}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

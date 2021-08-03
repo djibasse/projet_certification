@@ -2,41 +2,57 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OptionRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=OptionRepository::class)
  * @ORM\Table(name="`option`")
  */
-#[ApiResource()]
-
+#[ApiResource(
+    normalizationContext:['groups' =>['lire_option']],
+    denormalizationContext:['groups' =>['modifier_option']],
+ 
+    itemOperations:[
+        'put',
+        'delete',
+        'get'=> [
+            'normalization_context' => ['groups' => ['lire_option']]
+        ]
+    ]
+)]
 class Option
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("lire_option")
      */
     private $id;
 
     /**
+     * @Groups("lire_option")
      * @ORM\Column(type="string", length=255)
      */
     private $libele;
 
     /**
+     * @Groups("lire_option")
      * @ORM\Column(type="string", length=255)
      */
     private $description;
 
     /**
+     * @Groups("lire_option")
      * @ORM\Column(type="integer")
      */
     private $tarification;
 
     /**
+     * @Groups("lire_option")
      * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="options")
      */
     private $reservation;

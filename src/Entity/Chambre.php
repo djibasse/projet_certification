@@ -2,17 +2,29 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\ChambreRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ChambreRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ChambreRepository::class)
  */
 
-#[ApiResource()] 
+#[ApiResource(
+    normalizationContext:['groups' =>['lire_chambre']],
+    denormalizationContext:['groups' =>['modifier_chambre']],
+    
+    itemOperations:[
+        'put',
+        'delete',
+        'get'=> [
+            'normalization_context' => ['groups' => ['lire_une_chambre','lire_chambre']]
+        ]
+    ]
+)]
 
 class Chambre
 {
@@ -20,51 +32,61 @@ class Chambre
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("lire_chambre")
      */
     private $id;
 
     /**
+     * @Groups("lire_chambre","lire_une_chambre","changer_une_chambre")
      * @ORM\Column(type="integer")
      */
     private $numeroChambre;
 
     /**
+     * @Groups("lire_chambre","changer_une_chambre")
      * @ORM\Column(type="integer")
      */
     private $etage;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("lire_chambre","changer_une_chambre")
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("lire_une_chambre","changer_une_chambre")
      */
     private $prix;
 
     /**
+     * @Groups("lire_une_chambre","changer_une_chambre")
      * @ORM\Column(type="string", length=255)
      */
     private $etat;
 
     /**
+     * @Groups("lire_une_chambre","changer_une_chambre")
      * @ORM\Column(type="integer")
      */
     private $nombreDeLits;
 
     /**
+     * @Groups("lire_une_chambre","changer_une_chambre")
      * @ORM\Column(type="string", length=255)
      */
     private $chauffage;
 
     /**
+     * @Groups("lire_une_chambre","changer_une_chambre")
      * @ORM\Column(type="string", length=255)
      */
     private $salleDeBain;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="chambre")
+    /** 
+     *@Groups("lire_une_chambre","changer_une_chambre")
+     *@ORM\OneToMany(targetEntity=Reservation::class, mappedBy="chambre")
      */
     private $reservations;
 
