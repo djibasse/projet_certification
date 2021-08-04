@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'put',
         'delete',
         'get'=> [
-            'normalization_context' => ['groups' => ['lire_reservation']]
+            'normalization_context' => ['groups' => ['lire_une_reservation']]
         ]
     ]
 )]
@@ -31,42 +31,43 @@ class Reservation
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("lire_reservation")
+     * @Groups("lire_reservation","lire_une_reservation","lire_une_chambre")
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("lire_reservation")
+     * @Groups("lire_reservation","lire_une_chambre","lire_une_reservation")
      */
     private $numeroReservation;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups("lire_reservation")
+     * @Groups("lire_reservation","lire_une_reservation","lire_une_chambre")
      */
     private $dateReservation;
 
     /**
      * @ORM\Column(type="date")
-     * @Groups("lire_reservation")
+     * @Groups("lire_reservation","lire_une_reservation")
      */
     private $dateFinReservation;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("lire_reservation")
+     * @Groups("lire_reservation","lire_une_reservation")
      */
     private $nombreDePersonne;
 
     /**
      * @ORM\OneToMany(targetEntity=Option::class, mappedBy="reservation")
-     * @Groups("lire_reservation")
+     * @Groups("lire_reservation","lire_une_reservation")
      */
     private $options;
 
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="reservations")
+     * @Groups("lire_une_reservation")
      */
     private $client;
 
@@ -132,7 +133,7 @@ class Reservation
 
         return $this;
     }
-
+    
     /**
      * @return Collection|Option[]
      */

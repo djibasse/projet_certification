@@ -32,66 +32,67 @@ class Chambre
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("lire_chambre")
+     * @Groups("lire_chambre","lire_une_chambre")
      */
     private $id;
 
     /**
-     * @Groups("lire_chambre","lire_une_chambre","changer_une_chambre")
+     * @Groups("lire_chambre","lire_une_chambre","modifier_chambre")
      * @ORM\Column(type="integer")
      */
     private $numeroChambre;
 
     /**
-     * @Groups("lire_chambre","changer_une_chambre")
+     * @Groups("lire_chambre","lire_une_chambre","modifier_chambre")
      * @ORM\Column(type="integer")
      */
     private $etage;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("lire_chambre","changer_une_chambre")
+     * @Groups("lire_chambre","modifier_chambre","lire_une_chambre")
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("lire_une_chambre","changer_une_chambre")
+     * @Groups("lire_une_chambre","modifier_chambre")
      */
     private $prix;
 
     /**
-     * @Groups("lire_une_chambre","changer_une_chambre")
+     * @Groups("lire_une_chambre","modifier_chambre")
      * @ORM\Column(type="string", length=255)
      */
     private $etat;
 
     /**
-     * @Groups("lire_une_chambre","changer_une_chambre")
+     * @Groups("lire_une_chambre","modifier_chambre")
      * @ORM\Column(type="integer")
      */
     private $nombreDeLits;
 
     /**
-     * @Groups("lire_une_chambre","changer_une_chambre")
+     * @Groups("lire_une_chambre","modifier_chambre")
      * @ORM\Column(type="string", length=255)
      */
     private $chauffage;
 
     /**
-     * @Groups("lire_une_chambre","changer_une_chambre")
+     * @Groups("lire_une_chambre","modifier_chambre")
      * @ORM\Column(type="string", length=255)
      */
     private $salleDeBain;
 
     /** 
-     *@Groups("lire_une_chambre","changer_une_chambre")
+     *@Groups("lire_une_chambre","modifier_chambre")
      *@ORM\OneToMany(targetEntity=Reservation::class, mappedBy="chambre")
      */
     private $reservations;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="chambres")
+     *@Groups("lire_une_chambre")
+     *@ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="chambres")
      */
     private $categorie;
 
@@ -188,6 +189,11 @@ class Chambre
 
         return $this;
     }
+    public function __toString()
+    {
+return (string) $this->numeroChambre;
+    }
+
 
     public function getSalleDeBain(): ?string
     {
@@ -218,6 +224,7 @@ class Chambre
 
         return $this;
     }
+    
 
     public function removeReservation(Reservation $reservation): self
     {

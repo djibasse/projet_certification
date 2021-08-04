@@ -23,29 +23,44 @@
           </div>
           <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#" _msthash="1864226" _msttexthash="349570">Barre de navigation</a>
+              <a class="navbar-brand" href= '{{path('accueil')}}' _msthash="1864226" _msttexthash="349570">Accueil</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" _msthidden="A" _msthiddenattr="1739517" _mstaria-label="320099">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                   <li class="nav-item">
-                    <a class="nav-link active" href="#"><font _mstmutation="1" _msthash="622544" _msttexthash="114218">domicile </font><span class="visually-hidden" _msthash="913744" _msttexthash="122200">(current)</span>
+                    <a class="nav-link active" href="{{path('chambre_index')}}"><font _mstmutation="1" _msthash="622544" _msttexthash="114218">Chambres </font><span class="visually-hidden" _msthash="913744" _msttexthash="122200">(current)</span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#" _msthash="622726" _msttexthash="329004">fonctionnalités</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#" _msthash="622908" _msttexthash="98358">prisée</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#" _msthash="623090" _msttexthash="100295">environ</a>
+                    <a class="nav-link" href="{{path('reservation_new')}}" _msthash="622726" _msttexthash="329004">Reservation</a>
                   </li>
                 </ul>
+
+                {% if not app.user %}
+
                 <form class="d-flex">
-                  <button class="btn btn-secondary my-2 my-sm-0" type="submit" _msthash="730886" _msttexthash="157274">Connexion</button>
+                  <ul class="navbar-nav me-auto">
+                    <div>
+                    <li class="nav-item">
+                      <button href= "{{ path('app_login') }}"  class="btn btn-primary" _msthash="1333917" _msttexthash="116402">Connexion</button>
+                    </li>
+                    </div>
+                    <div>
+                    <li class="nav-item">
+                      <button href= "{{ path('app_register') }}"  class="btn btn-primary" _msthash="1333917" _msttexthash="116402">Inscription</button>
+                    </li>
+                    </div>
+                    </ul>
                 </form>
+
+                 {% else %}
+
+                <form class="d-flex">
+                  <button href= "{{ path('app_logout') }}"  class="btn btn-primary" _msthash="1333917" _msttexthash="116402">Deconnexion</button>
+                </form>
+                {% endif %}
               </div>
             </div>
           </nav>

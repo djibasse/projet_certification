@@ -38,13 +38,13 @@ class Categorie
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("lire_categorie","modifier_categorie")
+     * @Groups("lire_categorie","modifier_categorie","lire_une_chambre")
      */
     private $libele;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("lire_categorie","modifier_categorie")
+     * @Groups("lire_categorie","modifier_categorie","lire_une_chambre")
      */
     private $description;
 

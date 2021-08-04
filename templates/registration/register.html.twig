@@ -6,10 +6,27 @@
     <h1>Register</h1>
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
+    <div class ="row">
+        <div class="col-md-4">{{form_row(registrationForm.nom,{'attr': { 'placeholder': 'Saisir votre nom'}}) }}</div>
+        <div class="col-md-4">{{form_row(registrationForm.prenom,{'attr': { 'placeholder': 'Saisir votre prenom'}}) }}</div>
+    </div>
+    <div class ="row">
+        <div class="col-md-4">{{form_row(registrationForm.dateNaissance)}}</div>
+    </div>
+    <div class ="row">
+        <div class="col-md-4">{{form_row(registrationForm.adresse,{'attr': { 'placeholder': 'Saisir votre adresse'}}) }}</div>
+        <div class="col-md-4">{{form_row(registrationForm.telephone,{'attr': { 'placeholder': 'Numero de la chambre'}}) }}</div>
+    </div>
+    <div class ="row">
+        <div class="col-md-4">{{form_row(registrationForm.sexe,{'attr': { 'placeholder': 'Numero de la chambre'}}) }}</div>
+        <div class="col-md-4">{{form_row(registrationForm.cin,{'attr': { 'placeholder': 'Numero de la chambre'}}) }}</div>
+    </div>
+    <div class ="row">
+        <div class="col-md-8">{{ form_row(registrationForm.email) }}</div>
+        <div class="col-md-8">{{ form_row(registrationForm.plainPassword, {
             label: 'Password'
-        }) }}
+        }) }}</div>
+    </div>
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn">Register</button>
