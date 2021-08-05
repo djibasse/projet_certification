@@ -9,13 +9,25 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+
+    #[Route (path:'/api/login', name: 'api_login', methods:['POST'] )]
+    public function login(){
+   
+    $user = $this->getUser();
+    return $this->json([
+        'username' => $user ->getUsername(),
+        'role' => $user ->getRoles()
+    ]);    
+}
+
+
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function rlogin(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-             return $this->redirectToRoute('target_path');
+             return $this->redirectToRoute('/');
          }
 
         // get the login error if there is one

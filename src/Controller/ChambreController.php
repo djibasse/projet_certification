@@ -10,10 +10,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/chambre')]
+
 class ChambreController extends AbstractController
 {
-    #[Route('/', name: 'chambre_index', methods: ['GET'])]
+    
+    
+
+    #[Route('/', name: 'accueil', methods: ['GET'])]
+    public function accueil(ChambreRepository $chambreRepository): Response
+    {
+        return $this->render('chambre/accueil.html.twig', [
+            'chambres' => $chambreRepository->findAll(),
+        ]);
+    }#[Route('/chambre/', name: 'chambre_index', methods: ['GET'])]
     public function index(ChambreRepository $chambreRepository): Response
     {
         return $this->render('chambre/index.html.twig', [
@@ -21,7 +30,7 @@ class ChambreController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'chambre_new', methods: ['GET', 'POST'])]
+    #[Route('/chambre/new', name: 'chambre_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $chambre = new Chambre();
@@ -42,7 +51,7 @@ class ChambreController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'chambre_show', methods: ['GET'])]
+    #[Route('/chambre/{id}', name: 'chambre_show', methods: ['GET'])]
     public function show(Chambre $chambre): Response
     {
         return $this->render('chambre/show.html.twig', [
@@ -50,7 +59,7 @@ class ChambreController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'chambre_edit', methods: ['GET', 'POST'])]
+    #[Route('/chambre/{id}/edit', name: 'chambre_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Chambre $chambre): Response
     {
         $form = $this->createForm(ChambreType::class, $chambre);
@@ -68,7 +77,7 @@ class ChambreController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'chambre_delete', methods: ['POST'])]
+    #[Route('/chambre/{id}', name: 'chambre_delete', methods: ['POST'])]
     public function delete(Request $request, Chambre $chambre): Response
     {
         if ($this->isCsrfTokenValid('delete'.$chambre->getId(), $request->request->get('_token'))) {

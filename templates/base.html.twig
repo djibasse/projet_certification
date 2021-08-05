@@ -30,11 +30,16 @@
               <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                   <li class="nav-item">
-                    <a class="nav-link active" href="{{path('chambre_index')}}"><font _mstmutation="1" _msthash="622544" _msttexthash="114218">Chambres </font><span class="visually-hidden" _msthash="913744" _msttexthash="122200">(current)</span>
+                    <a class="nav-link active" href="{{path('chambre_index')}}"><font _mstmutation="1"_msthash="1333917" _msttexthash="116402"> Nos Chambres </font><span class="visually-hidden" _msthash="913744" _msttexthash="122200">(current)</span>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{path('reservation_new')}}" _msthash="622726" _msttexthash="329004">Reservation</a>
+                  <li class="nav-item me-auto">
+                    <a class="nav-link active" href="{{path('reservation_new')}}"><font _mstmutation="1" _msthash="622544" _msttexthash="114218"> Reservations </font><span class="visually-hidden" _msthash="913744" _msttexthash="122200">(current)</span>
+                    </a>
+                  </li>
+                  <li class="nav-item me-auto">
+                    <a class="nav-link active" href="#"><font _mstmutation="1" _msthash="622544" _msttexthash="114218"> Contactez nous </font><span class="visually-hidden" _msthash="913744" _msttexthash="122200">(current)</span>
+                    </a>
                   </li>
                 </ul>
 
@@ -47,9 +52,12 @@
                       <button href= "{{ path('app_login') }}"  class="btn btn-primary" _msthash="1333917" _msttexthash="116402">Connexion</button>
                     </li>
                     </div>
+                    
+                    <div>
+                    </div>
                     <div>
                     <li class="nav-item">
-                      <button href= "{{ path('app_register') }}"  class="btn btn-primary" _msthash="1333917" _msttexthash="116402">Inscription</button>
+                      <button href="{{ path('app_register') }}"  class="btn btn-primary" _msthash="1333917" _msttexthash="116402">Inscription</button>
                     </li>
                     </div>
                     </ul>
@@ -58,7 +66,7 @@
                  {% else %}
 
                 <form class="d-flex">
-                  <button href= "{{ path('app_logout') }}"  class="btn btn-primary" _msthash="1333917" _msttexthash="116402">Deconnexion</button>
+                  <button href="{{ path('app_logout') }}"  class="btn btn-primary" _msthash="1333917" _msttexthash="116402">Deconnexion</button>
                 </form>
                 {% endif %}
               </div>

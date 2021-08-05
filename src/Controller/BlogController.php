@@ -29,28 +29,5 @@ class BlogController extends AbstractController
         return $this->render('blog/accueil.html.twig');
     }
 
-    #[Route('/blog/create', name: 'creation_chambre')]
     
-    public function create( Request $request): Response{
-        $chambre = new Chambre();
-
-        $form = $this->createForm(ChambreType::class, $chambre);
-
-       $form->handleRequest($request);
-
-       if($form->isSubmitted()&&$form->isValid()){
-
-           $entityManager = $this->getDoctrine()->getManager();
-           $entityManager->persist($chambre);
-           $entityManager-> flush();
-
-           Return $this->redirectToRoute('chambre');
-       }
-
-       return $this->render ("blog/create.html.twig",[
-           'formChambre'=> $form->createView()
-           ]);
-  }
-
-
 }

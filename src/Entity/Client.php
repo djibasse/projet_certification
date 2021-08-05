@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Webmozart\Assert\Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\Collection;
@@ -17,28 +18,16 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 
-#[ApiResource(
-    
-    normalizationContext:['groups' =>['lire_client']],
-    denormalizationContext:['groups' =>['modifier_client']],
- 
-    itemOperations:[
-        'put',
-        'delete',
-        'get'=> [
-            'normalization_context' => ['groups' => ['lire_client']]
-        ]
-    ]
-)]
+
 
 
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("lire_client")
      */
     private $id;
 
@@ -56,6 +45,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * 
      */
     private $password;
 

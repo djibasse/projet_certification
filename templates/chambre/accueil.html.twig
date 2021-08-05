@@ -1,0 +1,24 @@
+{% extends 'base.html.twig'%}
+
+{% block title %}Bienvenue sur la page d'accueil{% endblock %}
+
+{% block body %}
+
+{% for chambre in chambres %}
+<div class="card mb-3">
+  <h3 class="card-header" _msthash="1596478" _msttexthash="268203">{{ chambre.description }}</h3>
+  <div class="card-body">
+    <h5 class="card-title" _msthash="1977079" _msttexthash="652717">Traitement spécial du titre</h5>
+    <h6 class="card-subtitle text-muted" _msthash="1977313" _msttexthash="3779100">Sous-titre de la carte d’assistance</h6>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Espace réservé : capuchon d’image" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle" _mstaria-label="4038580">
+    <rect width="100%" height="100%" fill="#868e96"></rect>
+    <text x="50%" y="50%" fill="#dee2e6" dy=".3em" _mstHash="2128360" _mstTextHash="1969318">Capuchon d’image</text>
+</svg>
+  <div class="card-body">
+    <p class="card-text" _msthash="1915992" _msttexthash="9204117">Quelques exemples de texte rapides pour construire sur le titre de la carte et constituer la majeure partie du contenu de la carte.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="card-footer text-muted" _msthash="1666418" _msttexthash="154531"><h2>{{ chambre.prix }}</h2> </div>
+  </div>
+   {% endfor %}
+{% endblock %}
